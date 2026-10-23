@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clawpaw"
+version = "0.2.5"
+description = "Windows and Edge browser tools for OpenClaw and other local agents"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+dependencies = ["mss>=10,<11", "Pillow>=11,<13"]
+classifiers = ["Operating System :: Microsoft :: Windows", "Programming Language :: Python :: 3"]
+
+[project.urls]
+Homepage = "https://github.com/wuchenwl/clawpaw"
+Repository = "https://github.com/wuchenwl/clawpaw"
+Issues = "https://github.com/wuchenwl/clawpaw/issues"
+
+[project.optional-dependencies]
+uia = ["uiautomation>=2.0.20,<3; sys_platform == 'win32'"]
+browser = ["playwright>=1.49,<2"]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+
+[project.scripts]
+clawpaw = "clawpaw.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.data-files]
+"share/clawpaw" = ["SKILL.md"]
+"share/clawpaw/references" = ["references/browser.md", "references/windows.md", "references/media.md"]
+"share/clawpaw/scripts" = ["scripts/find_download.py"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
